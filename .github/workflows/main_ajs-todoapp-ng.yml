@@ -74,7 +74,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'ajs-todoapp-ng'
-          slot-name: 'dev'
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D0208CE443C4D9AB31FD17E995100EC }}
           package: .
 
