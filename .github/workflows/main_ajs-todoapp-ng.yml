@@ -23,7 +23,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-
   build:
     runs-on: ubuntu-latest
 
@@ -54,9 +53,34 @@ jobs:
           name: node-app
           path: dist/todo-app
 
-  deploy:
+  deploy-dev:
     runs-on: ubuntu-latest
     needs: build
+    environment:
+      name: 'dev'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: node-app
+
+      # - name: unzip artifact for deployment
+      #   run: unzip release.zip
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'ajs-todoapp-ng'
+          slot-name: 'dev'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D0208CE443C4D9AB31FD17E995100EC }}
+          package: .
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    needs: [build, deploy-dev]
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
