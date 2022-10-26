@@ -31,14 +31,14 @@ jobs:
       #   run: |
       #     npm run test --if-present
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      # - name: Zip artifact for deployment
+      #   run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: release.zip
+          path: dist/todo-app
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,8 +53,8 @@ jobs:
         with:
           name: node-app
 
-      - name: unzip artifact for deployment
-        run: unzip release.zip
+      # - name: unzip artifact for deployment
+      #   run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -63,4 +63,4 @@ jobs:
           app-name: 'ajs-todoapp-ng'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D0208CE443C4D9AB31FD17E995100EC }}
-          package: ./dist/todo-app/
+          package: .
