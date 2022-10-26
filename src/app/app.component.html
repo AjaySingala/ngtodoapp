@@ -1,0 +1,16 @@
+<h2>To-Do Items</h2>
+<div>
+  <li *ngFor="let todo of todoItems">
+       {{ todo.name }}
+  </li>
+</div>
+
+<div>
+  <button (click)="addTodoItem()">Add Todo Item</button>
+</div>
+  
+<div>
+  <button (click)="deleteTodoItem()">Delete Todo Item</button>
+</div>
+
+<router-outlet></router-outlet>
