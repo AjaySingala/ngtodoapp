@@ -1,0 +1,7 @@
+organization=june2019ajs
+projectKey=AjaySingala_ngtodoapp
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.34111
+dashboardUrl=https://sonarcloud.io/dashboard?id=AjaySingala_ngtodoapp
+ceTaskId=AYQVkhMiJifM9PFV9x9j
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYQVkhMiJifM9PFV9x9j
